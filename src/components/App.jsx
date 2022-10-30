@@ -22,13 +22,15 @@ export class App extends React.Component {
 
   addContact = ({ name, number }) => {
     if (
-      !this.state.contacts.some(contact => {
+      this.state.contacts.some(contact => {
         return contact.name === name || contact.number === number;
       })
-    )
-      this.setState(prev => ({
-        contacts: [...prev.contacts, { name, number, id: nanoid() }],
-      }));
+    ) {
+      return alert(`${name} is already in contacts`);
+    }
+    this.setState(prev => ({
+      contacts: [...prev.contacts, { name, number, id: nanoid() }],
+    }));
   };
 
   filterContact = () => {
