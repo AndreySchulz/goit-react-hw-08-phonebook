@@ -15,9 +15,9 @@ export class App extends React.Component {
     filter: '',
   };
   inputValueForm = e => {
-    const { name, value } = e.target;
+    const { value } = e.target;
 
-    this.setState({ [name]: value });
+    this.setState({ filter: value });
   };
 
   addContact = ({ name, number }) => {
