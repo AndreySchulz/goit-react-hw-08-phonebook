@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 const ContactList = ({ filttredContacts, removeContact }) => {
   return (
     <ul>
@@ -20,3 +22,14 @@ const ContactList = ({ filttredContacts, removeContact }) => {
   );
 };
 export default ContactList;
+
+ContactList.propTypes = {
+  removeContact: PropTypes.func.isRequired,
+  filttredContacts: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      number: PropTypes.string.isRequired,
+      id: PropTypes.string.isRequired,
+    }).isRequired
+  ).isRequired,
+};
