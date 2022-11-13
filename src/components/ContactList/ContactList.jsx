@@ -1,16 +1,20 @@
-import PropTypes from 'prop-types';
+import { useDispatch, useSelector } from 'react-redux';
+import { removeContact } from 'redux/contactsSlice';
+import { getFilterContacts } from 'redux/selectors';
 
-const ContactList = ({ filttredContacts, removeContact }) => {
+const ContactList = () => {
+  const dispatch = useDispatch();
+  const contacts = useSelector(getFilterContacts);
   return (
     <ul>
-      {filttredContacts.map(({ name, number, id }) => {
+      {contacts.map(({ name, number, id }) => {
         return (
           <li key={id}>
             {name} : {number}
             <button
               type="button"
               onClick={() => {
-                removeContact(id);
+                dispatch(removeContact(id));
               }}
             >
               Delete
@@ -22,14 +26,3 @@ const ContactList = ({ filttredContacts, removeContact }) => {
   );
 };
 export default ContactList;
-
-ContactList.propTypes = {
-  removeContact: PropTypes.func.isRequired,
-  filttredContacts: PropTypes.arrayOf(
-    PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      number: PropTypes.string.isRequired,
-      id: PropTypes.string.isRequired,
-    }).isRequired
-  ).isRequired,
-};
