@@ -1,38 +1,40 @@
 import { nanoid } from 'nanoid';
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { addContact } from 'redux/contactsSlice';
+import { addContacts } from 'redux/contactsOperations';
+
 import { getAllContacts } from 'redux/selectors';
 
 function ContactForm() {
   const [name, setName] = useState('');
-  const [number, setNumber] = useState('');
+  const [phone, setPhone] = useState('');
   const contacts = useSelector(getAllContacts);
   const dispatch = useDispatch();
 
   const handleSubmit = e => {
     e.preventDefault();
-    formContact(name, number);
+    formContact(name, phone);
     reset();
   };
-  const formContact = (name, number) => {
+  const formContact = (name, phone) => {
     if (
       contacts.some(contact => {
-        return contact.name === name || contact.number === number;
+        return contact.name === name || contact.phone === phone;
       })
     ) {
       return alert(`${name} is already in contacts`);
     }
-    dispatch(addContact({ name, number, id: nanoid() }));
+    dispatch(addContacts({ name, phone, id: nanoid() }));
   };
   const inputValueForm = e => {
     const { value } = e.target;
+
     switch (e.target.name) {
       case 'name':
         setName(value);
         break;
-      case 'number':
-        setNumber(value);
+      case 'phone':
+        setPhone(value);
         break;
       default:
         return;
@@ -41,7 +43,7 @@ function ContactForm() {
 
   const reset = () => {
     setName('');
-    setNumber('');
+    setPhone('');
   };
 
   return (
@@ -63,11 +65,11 @@ function ContactForm() {
         Number
         <input
           type="tel"
-          name="number"
+          name="phone"
           pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
           title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
           required
-          value={number}
+          value={phone}
           onChange={inputValueForm}
         />
       </label>
