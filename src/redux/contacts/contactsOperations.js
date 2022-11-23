@@ -6,7 +6,7 @@ import {
 } from 'utils/phoneApi';
 
 export const getContacts = createAsyncThunk(
-  'contact/get',
+  'contacts/get',
   async (_, { rejectWithValue }) => {
     try {
       const contacts = await fetchContactsApi();
@@ -21,6 +21,7 @@ export const addContacts = createAsyncThunk(
   async (data, thunkApi) => {
     try {
       const contacts = await addContactApi(data);
+      console.log(data);
       return contacts;
     } catch (error) {
       return thunkApi.rejectWithValue(error.message);
