@@ -9,14 +9,6 @@ const PrivateRoute = () => {
   const userEmail = useSelector(getUserEmail);
   return (
     <>
-      <ul>
-        <li>
-          <NavLink to="/">Home</NavLink>
-        </li>
-        <li>
-          <NavLink to="contacts">Contacts</NavLink>
-        </li>
-      </ul>
       <div>
         <p>{userEmail}</p>
         <Button

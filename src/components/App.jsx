@@ -34,7 +34,7 @@ export function App() {
         <Route path="contacts" element={<ContactsPage />} />
       </Route>
 
-      <Route path="*" element={<Navigate to="/" />} />
+      <Route path="*" element={<Navigate to="contacts" />} />
     </Routes>
   ) : (
     <Routes>

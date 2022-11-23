@@ -9,6 +9,9 @@ import {
 const handleRejected = (state, { payload }) => {
   state.error = payload;
 };
+// const handlePending = state => {
+//   state.isLoading = true;
+// };
 const initialState = {
   user: {
     name: null,
@@ -17,6 +20,7 @@ const initialState = {
   token: null,
   isLoggedIn: false,
   error: null,
+  //   isLoading: false,
 };
 
 const authSlice = createSlice({
